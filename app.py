@@ -579,15 +579,27 @@ def obtener_vacas():
     # GUARDAR
     # --------------------------------------
 
-    db["vacas"].insert_one(
+    # Guardar la vaca en MongoDB.
+    # PyMongo agrega automáticamente un ObjectId en "_id".
+    resultado_vaca = db["vacas"].insert_one(
         documento_vaca
     )
 
+    # ObjectId no es serializable directamente por jsonify,
+    # por lo que lo convertimos a texto antes de responder.
+    documento_vaca["_id"] = str(
+        resultado_vaca.inserted_id
+    )
 
-    db["collares"].insert_one(
+    # Guardar el collar en MongoDB.
+    resultado_collar = db["collares"].insert_one(
         documento_collar
     )
 
+    # También convertimos el ObjectId del collar a texto.
+    documento_collar["_id"] = str(
+        resultado_collar.inserted_id
+    )
 
     return jsonify({
 
@@ -598,7 +610,9 @@ def obtener_vacas():
             documento_vaca,
 
         "collar":
-            documento_collar
+            convertir_datetime_a_string(
+                documento_collar
+            )
 
     }), 201
 
