@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Detalle de vaca | Ganado Inteligente
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/vaca.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- NAVBAR -->
+    <!-- ================================= -->
+
+    <header class="detail-navbar">
+
+        <div class="detail-brand">
+
+            <div class="brand-icon">
+                🐄
+            </div>
+
+            <div>
+
+                <div class="brand-title">
+                    GANADO INTELIGENTE
+                </div>
+
+                <div class="brand-subtitle">
+                    DETALLE DEL ANIMAL
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="/dashboard"
+            class="back-button"
+        >
+            ← Volver al dashboard
+        </a>
+
+    </header>
+
+
+    <!-- ================================= -->
+    <!-- CONTENIDO -->
+    <!-- ================================= -->
+
+    <main class="detail-container">
+
+
+        <!-- CABECERA DE LA VACA -->
+
+        <section class="animal-header">
+
+            <div>
+
+                <span class="section-label">
+                    PERFIL DEL ANIMAL
+                </span>
+
+                <h1 id="vaca-nombre">
+                    Cargando...
+                </h1>
+
+                <p id="vaca-identificacion">
+                    Cargando información...
+                </p>
+
+            </div>
+
+
+            <div
+                id="vaca-estado"
+                class="animal-status"
+            >
+                Cargando...
+            </div>
+
+        </section>
+
+
+        <!-- DATOS GENERALES -->
+
+        <section class="info-grid">
+
+
+            <article class="info-card">
+
+                <span>
+                    RAZA
+                </span>
+
+                <strong id="vaca-raza">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <span>
+                    SEXO
+                </span>
+
+                <strong id="vaca-sexo">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <span>
+                    EDAD
+                </span>
+
+                <strong id="vaca-edad">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <span>
+                    PESO ACTUAL
+                </span>
+
+                <strong id="vaca-peso">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <span>
+                    COLLAR
+                </span>
+
+                <strong id="vaca-collar">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="info-card">
+
+                <span>
+                    VACA ID
+                </span>
+
+                <strong id="vaca-id">
+                    --
+                </strong>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- ESTADO ACTUAL -->
+
+        <section class="current-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        TELEMETRÍA
+                    </span>
+
+                    <h2>
+                        Estado actual
+                    </h2>
+
+                </div>
+
+                <span
+                    id="ultima-medicion"
+                    class="last-update"
+                >
+                    --
+                </span>
+
+            </div>
+
+
+            <div class="metrics-grid">
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon">
+                        🌡️
+                    </div>
+
+                    <span>
+                        TEMPERATURA
+                    </span>
+
+                    <strong id="current-temperature">
+                        --
+                    </strong>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon">
+                        ❤️
+                    </div>
+
+                    <span>
+                        FRECUENCIA CARDIACA
+                    </span>
+
+                    <strong id="current-cardiaca">
+                        --
+                    </strong>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon">
+                        🫁
+                    </div>
+
+                    <span>
+                        FRECUENCIA RESPIRATORIA
+                    </span>
+
+                    <strong id="current-respiratoria">
+                        --
+                    </strong>
+
+                </article>
+
+
+                <article class="metric-card">
+
+                    <div class="metric-icon">
+                        🔋
+                    </div>
+
+                    <span>
+                        BATERÍA
+                    </span>
+
+                    <strong id="current-bateria">
+                        --
+                    </strong>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- GRÁFICAS -->
+
+        <section class="charts-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        HISTORIAL
+                    </span>
+
+                    <h2>
+                        Mediciones
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="charts-grid">
+
+
+                <article class="chart-card">
+
+                    <span class="chart-label">
+                        TEMPERATURA
+                    </span>
+
+                    <h3>
+                        Temperatura corporal
+                    </h3>
+
+                    <div class="chart-wrapper">
+
+                        <canvas
+                            id="temperatura-chart"
+                        ></canvas>
+
+                    </div>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <span class="chart-label">
+                        FRECUENCIA CARDIACA
+                    </span>
+
+                    <h3>
+                        Frecuencia cardiaca
+                    </h3>
+
+                    <div class="chart-wrapper">
+
+                        <canvas
+                            id="cardiaca-chart"
+                        ></canvas>
+
+                    </div>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <span class="chart-label">
+                        FRECUENCIA RESPIRATORIA
+                    </span>
+
+                    <h3>
+                        Frecuencia respiratoria
+                    </h3>
+
+                    <div class="chart-wrapper">
+
+                        <canvas
+                            id="respiratoria-chart"
+                        ></canvas>
+
+                    </div>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <span class="chart-label">
+                        BATERÍA
+                    </span>
+
+                    <h3>
+                        Evolución del voltaje
+                    </h3>
+
+                    <div class="chart-wrapper">
+
+                        <canvas
+                            id="bateria-chart"
+                        ></canvas>
+
+                    </div>
+
+                </article>
+
+
+                <article
+                    class="chart-card chart-full"
+                >
+
+                    <span class="chart-label">
+                        PESO
+                    </span>
+
+                    <h3>
+                        Historial de peso
+                    </h3>
+
+                    <div class="chart-wrapper">
+
+                        <canvas
+                            id="peso-chart"
+                        ></canvas>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- MAPA -->
+
+        <section class="location-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        UBICACIÓN
+                    </span>
+
+                    <h2>
+                        Posición actual
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div id="animal-map"></div>
+
+        </section>
+
+
+        <!-- ALERTAS -->
+
+        <section class="alerts-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ATENCIÓN
+                    </span>
+
+                    <h2>
+                        Alertas del animal
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="animal-alerts"
+                class="animal-alerts"
+            >
+                Cargando...
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <strong>
+            GANADO INTELIGENTE
+        </strong>
+
+        <span>
+            Sistema de monitoreo de ganado
+        </span>
+
+    </footer>
+
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/vaca.js') }}"
+    ></script>
+
+</body>
+
+</html>

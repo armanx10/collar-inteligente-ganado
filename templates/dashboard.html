@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Monitoreo | Ganado Inteligente
+    </title>
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ========================================= -->
+    <!-- NAVBAR -->
+    <!-- ========================================= -->
+
+    <header class="dashboard-navbar">
+
+        <div class="dashboard-brand">
+
+            <div class="brand-icon">
+                🐄
+            </div>
+
+            <div>
+
+                <div class="brand-title">
+                    GANADO INTELIGENTE
+                </div>
+
+                <div class="brand-subtitle">
+                    SISTEMA DE MONITOREO
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="dashboard-nav">
+
+            <a
+                href="/"
+                class="nav-item"
+            >
+                Inicio
+            </a>
+
+            <a
+                href="/dashboard"
+                class="nav-item active"
+            >
+                Ganado
+            </a>
+
+            <a
+                href="#alertas"
+                class="nav-item"
+            >
+                Alertas
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ========================================= -->
+    <!-- CONTENIDO -->
+    <!-- ========================================= -->
+
+    <main class="dashboard-container">
+
+
+        <!-- ENCABEZADO -->
+
+        <section class="dashboard-heading">
+
+            <div>
+
+                <span class="dashboard-label">
+                    MONITOREO EN TIEMPO REAL
+                </span>
+
+                <h1>
+                    Estado del ganado
+                </h1>
+
+                <p>
+                    Información actualizada de los collares
+                    inteligentes.
+                </p>
+
+            </div>
+
+
+            <div class="connection-status">
+
+                <span class="status-indicator"></span>
+
+                Sistema conectado
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- TARJETAS DE RESUMEN -->
+        <!-- ========================================= -->
+
+        <section class="summary-grid">
+
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+                    🐄
+                </div>
+
+                <div>
+
+                    <span class="summary-title">
+                        VACAS
+                    </span>
+
+                    <strong
+                        id="total-vacas"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <span class="summary-title">
+                        ACTIVAS
+                    </span>
+
+                    <strong
+                        id="vacas-activas"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <span class="summary-title">
+                        ALERTAS
+                    </span>
+
+                    <strong
+                        id="total-alertas"
+                    >
+                        --
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- GANADO -->
+
+<!-- MAPA -->
+
+
+<section class="map-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <span class="dashboard-label">
+                UBICACIÓN DEL GANADO
+            </span>
+
+            <h2>
+                Monitoreo geográfico
+            </h2>
+
+        </div>
+
+        <span class="last-update">
+            Posiciones actuales
+        </span>
+
+    </div>
+
+
+    <div class="map-wrapper">
+
+        <div id="map"></div>
+
+
+        <div class="map-info">
+
+            <span class="map-dot"></span>
+
+            Cada marcador representa la
+            última posición registrada
+            por un collar.
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section class="cattle-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        ANIMALES MONITOREADOS
+                    </span>
+
+                    <h2>
+                        Ganado
+                    </h2>
+
+                </div>
+
+                <span
+                    id="ultima-actualizacion"
+                    class="last-update"
+                >
+                    Actualizando...
+                </span>
+
+            </div>
+
+
+            <div
+                id="cattle-grid"
+                class="cattle-grid"
+            >
+
+                <div class="loading-card">
+
+                    <div class="loading-spinner"></div>
+
+                    <p>
+                        Cargando información...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+<!-- GRÁFICAS -->
+
+<section class="charts-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <span class="dashboard-label">
+                ANÁLISIS HISTÓRICO
+            </span>
+
+            <h2>
+                Mediciones
+            </h2>
+
+        </div>
+
+        <div class="cow-selector-container">
+
+            <label for="vaca-selector">
+                Seleccionar vaca
+            </label>
+
+            <select id="vaca-selector">
+                <option value="">
+                    Selecciona una vaca
+                </option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="charts-message"
+        class="charts-message"
+    >
+        Selecciona una vaca para visualizar
+        sus mediciones.
+    </div>
+
+
+    <div
+        id="charts-container"
+        class="charts-grid hidden"
+    >
+
+        <!-- TEMPERATURA -->
+
+        <article class="chart-card">
+
+            <div class="chart-card-header">
+
+                <div>
+
+                    <span class="chart-label">
+                        TEMPERATURA
+                    </span>
+
+                    <h3>
+                        Temperatura corporal
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="temperatura-chart"
+                ></canvas>
+
+            </div>
+
+        </article>
+
+
+        <!-- FRECUENCIA CARDIACA -->
+
+        <article class="chart-card">
+
+            <div class="chart-card-header">
+
+                <div>
+
+                    <span class="chart-label">
+                        FRECUENCIA CARDIACA
+                    </span>
+
+                    <h3>
+                        Frecuencia cardiaca
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="cardiaca-chart"
+                ></canvas>
+
+            </div>
+
+        </article>
+
+
+        <!-- FRECUENCIA RESPIRATORIA -->
+
+        <article class="chart-card">
+
+            <div class="chart-card-header">
+
+                <div>
+
+                    <span class="chart-label">
+                        FRECUENCIA RESPIRATORIA
+                    </span>
+
+                    <h3>
+                        Frecuencia respiratoria
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="respiratoria-chart"
+                ></canvas>
+
+            </div>
+
+        </article>
+
+
+        <!-- BATERÍA -->
+
+        <article class="chart-card">
+
+            <div class="chart-card-header">
+
+                <div>
+
+                    <span class="chart-label">
+                        ENERGÍA
+                    </span>
+
+                    <h3>
+                        Voltaje de batería
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="bateria-chart"
+                ></canvas>
+
+            </div>
+
+        </article>
+
+
+        <!-- PESO -->
+
+        <article class="chart-card chart-full">
+
+            <div class="chart-card-header">
+
+                <div>
+
+                    <span class="chart-label">
+                        HISTORIAL DE PESO
+                    </span>
+
+                    <h3>
+                        Evolución del peso
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="peso-chart"
+                ></canvas>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+        <!-- ALERTAS -->
+
+        <section
+            id="alertas"
+            class="alerts-section"
+        >
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="dashboard-label">
+                        ATENCIÓN
+                    </span>
+
+                    <h2>
+                        Alertas recientes
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="alerts-container"
+                class="alerts-container"
+            >
+
+                <div class="empty-alerts">
+
+                    <span>
+                        ✓
+                    </span>
+
+                    <p>
+                        Cargando alertas...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ========================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================= -->
+
+    <footer class="dashboard-footer">
+
+        <div>
+
+            <strong>
+                GANADO INTELIGENTE
+            </strong>
+
+            <span>
+                Sistema de monitoreo de ganado
+            </span>
+
+        </div>
+
+
+        <div>
+            Ingeniería en Computación Inteligente
+        </div>
+
+    </footer>
+
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
+></script>
+
+<script
+    src="{{ url_for('static', filename='js/dashboard.js') }}"
+></script>
+
+</body>
+
+</html>

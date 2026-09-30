@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monitoreo del Ganado</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/monitoreo.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="pagina">
+
+    <header class="encabezado">
+        <div>
+            <div class="etiqueta">GANADO INTELIGENTE</div>
+            <h1>Monitoreo del ganado</h1>
+            <p>Ubicación GPS y control del perímetro del rancho</p>
+        </div>
+
+        <div class="acciones">
+            <button id="btnActualizar" class="boton boton-principal">
+                ↻ Actualizar
+            </button>
+
+            <a href="/dashboard" class="boton boton-secundario">
+                ← Dashboard
+            </a>
+        </div>
+    </header>
+
+
+    <section class="resumen">
+
+        <div class="tarjeta-resumen">
+            <span>Total de vacas</span>
+            <strong id="totalVacas">0</strong>
+        </div>
+
+        <div class="tarjeta-resumen dentro">
+            <span>Dentro del rancho</span>
+            <strong id="vacasDentro">0</strong>
+        </div>
+
+        <div class="tarjeta-resumen fuera">
+            <span>Fuera del rancho</span>
+            <strong id="vacasFuera">0</strong>
+        </div>
+
+        <div class="tarjeta-resumen alertas">
+            <span>Alertas abiertas</span>
+            <strong id="totalAlertas">0</strong>
+        </div>
+
+    </section>
+
+
+    <main class="contenido">
+
+        <section class="panel mapa-panel">
+
+            <div class="panel-titulo">
+                <div>
+                    <h2>Mapa del rancho</h2>
+                    <p id="estadoMapa">Cargando información...</p>
+                </div>
+
+                <div class="leyenda">
+                    <span><i class="punto verde"></i> Dentro</span>
+                    <span><i class="punto rojo"></i> Fuera</span>
+                    <span><i class="punto gris"></i> Sin GPS</span>
+                </div>
+            </div>
+
+            <div id="mapa"></div>
+
+        </section>
+
+
+        <aside class="panel lista-panel">
+
+            <div class="panel-titulo">
+                <div>
+                    <h2>Estado de las vacas</h2>
+                    <p id="ultimaActualizacion">Sin actualizar</p>
+                </div>
+            </div>
+
+            <div id="listaVacas" class="lista-vacas">
+                <div class="cargando">Cargando vacas...</div>
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <section class="panel alertas-panel">
+
+        <div class="panel-titulo">
+            <div>
+                <h2>Alertas de perímetro</h2>
+                <p>Eventos recientes de salida del rancho</p>
+            </div>
+        </div>
+
+        <div id="listaAlertas" class="lista-alertas">
+            <div class="cargando">Cargando alertas...</div>
+        </div>
+
+    </section>
+
+</div>
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin=""
+></script>
+
+<script
+    src="{{ url_for('static', filename='js/monitoreo.js') }}"
+></script>
+
+</body>
+</html>

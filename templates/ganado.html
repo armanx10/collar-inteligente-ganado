@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Gestión del Ganado</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/ganado.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="pagina">
+
+
+    <!-- ==========================================
+         ENCABEZADO
+         ========================================== -->
+
+    <header class="encabezado">
+
+        <div>
+
+            <span class="etiqueta">
+                GANADO INTELIGENTE
+            </span>
+
+            <h1>
+                Gestión del ganado
+            </h1>
+
+            <p>
+                Registra y administra las vacas y sus collares.
+            </p>
+
+        </div>
+
+
+        <div class="acciones">
+
+            <a
+                href="/dashboard"
+                class="boton boton-secundario"
+            >
+                ← Dashboard
+            </a>
+
+            <a
+                href="/monitoreo"
+                class="boton boton-principal"
+            >
+                Ver monitoreo
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTENIDO
+         ========================================== -->
+
+    <main class="contenido">
+
+
+        <!-- ======================================
+             FORMULARIO
+             ====================================== -->
+
+        <section class="panel formulario-panel">
+
+
+            <div class="panel-titulo">
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        NUEVO REGISTRO
+                    </span>
+
+                    <h2>
+                        Registrar nueva vaca
+                    </h2>
+
+                    <p>
+                        Completa la información del animal
+                        y del collar asignado.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form id="formVaca">
+
+
+                <div class="campo-grid">
+
+
+                    <!-- ID -->
+
+                    <div class="campo">
+
+                        <label for="vaca_id">
+                            ID de la vaca *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vaca_id"
+                            placeholder="Ej. 02050644"
+                            required
+                        >
+
+                        <small>
+                            Identificador único del animal.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- NOMBRE -->
+
+                    <div class="campo">
+
+                        <label for="nombre">
+                            Nombre *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ej. LUNA"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- RAZA -->
+
+                    <div class="campo">
+
+                        <label for="raza">
+                            Raza *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="raza"
+                            value="Brangus"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- SEXO -->
+
+                    <div class="campo">
+
+                        <label for="sexo">
+                            Sexo *
+                        </label>
+
+                        <select
+                            id="sexo"
+                            required
+                        >
+
+                            <option value="">
+                                Seleccionar
+                            </option>
+
+                            <option value="HEMBRA">
+                                Hembra
+                            </option>
+
+                            <option value="MACHO">
+                                Macho
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- EDAD -->
+
+                    <div class="campo">
+
+                        <label for="edad">
+                            Edad
+                        </label>
+
+                        <input
+                            type="number"
+                            id="edad"
+                            min="0"
+                            max="30"
+                            step="1"
+                            placeholder="Ej. 2"
+                        >
+
+                        <small>
+                            Edad en años.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- PESO -->
+
+                    <div class="campo">
+
+                        <label for="peso">
+                            Peso actual
+                        </label>
+
+                        <div class="input-unidad">
+
+                            <input
+                                type="number"
+                                id="peso"
+                                min="0"
+                                step="0.1"
+                                placeholder="Ej. 470"
+                            >
+
+                            <span>
+                                kg
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- COLLAR -->
+
+                    <div class="campo">
+
+                        <label for="collar_id">
+                            Collar *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="collar_id"
+                            placeholder="Ej. COLLAR011"
+                            required
+                        >
+
+                        <small>
+                            ID único del collar inteligente.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- ESTADO -->
+
+                    <div class="campo">
+
+                        <label for="estado">
+                            Estado
+                        </label>
+
+                        <select id="estado">
+
+                            <option value="activa">
+                                Activa
+                            </option>
+
+                            <option value="inactiva">
+                                Inactiva
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- MENSAJE -->
+
+                <div
+                    id="mensaje"
+                    class="mensaje"
+                ></div>
+
+
+
+                <!-- BOTONES -->
+
+                <div class="formulario-botones">
+
+                    <button
+                        type="button"
+                        id="btnLimpiar"
+                        class="boton boton-limpiar"
+                    >
+                        Limpiar
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="btnGuardar"
+                        class="boton boton-principal"
+                    >
+                        + Registrar vaca
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ======================================
+             LISTADO
+             ====================================== -->
+
+        <section class="panel listado-panel">
+
+
+            <div class="panel-titulo listado-header">
+
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        INVENTARIO
+                    </span>
+
+                    <h2>
+                        Vacas registradas
+                    </h2>
+
+                    <p>
+                        Animales actualmente registrados
+                        en el sistema.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="contador"
+                    class="contador"
+                >
+                    0 vacas
+                </div>
+
+
+            </div>
+
+
+
+            <div class="tabla-contenedor">
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+    <th>
+        ID
+    </th>
+
+    <th>
+        Nombre
+    </th>
+
+    <th>
+        Raza
+    </th>
+
+    <th>
+        Sexo
+    </th>
+
+    <th>
+        Edad
+    </th>
+
+    <th>
+        Peso
+    </th>
+
+    <th>
+        Collar
+    </th>
+
+    <th>
+        Estado
+    </th>
+
+    <th>
+        Acción
+    </th>
+
+</tr>
+                    </thead>
+
+
+                    <tbody
+                        id="tablaVacas"
+                    >
+
+                        <tr>
+
+                            <td
+                                colspan="9"
+                                class="cargando"
+                            >
+                                Cargando vacas...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<script
+    src="{{ url_for('static', filename='js/ganado.js') }}"
+></script>
+
+
+</body>
+
+</html>

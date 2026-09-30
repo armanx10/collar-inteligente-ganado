@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7f3;
+    color: #1f2937;
+}
+
+.contenedor {
+    width: 92%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.encabezado h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.encabezado p {
+    color: #6b7280;
+}
+
+.boton-regresar {
+    text-decoration: none;
+    background: white;
+    color: #374151;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+}
+
+.panel-controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.boton {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.boton:hover {
+    transform: translateY(-1px);
+}
+
+.boton-principal {
+    background: #2e7d32;
+    color: white;
+}
+
+.boton-guardar {
+    background: #1976d2;
+    color: white;
+}
+
+.boton-limpiar {
+    background: #757575;
+    color: white;
+}
+
+.informacion {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border: 1px solid #e5e7eb;
+}
+
+.estado {
+    color: #374151;
+}
+
+.contador {
+    color: #374151;
+}
+
+.nombre-rancho {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 15px;
+}
+
+.nombre-rancho label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.nombre-rancho input {
+    width: 100%;
+    max-width: 500px;
+    padding: 11px 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+#mapa {
+    width: 100%;
+    height: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #d1d5db;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.mensaje {
+    display: none;
+    padding: 12px 15px;
+    background: #fff8e1;
+    border: 1px solid #f0c36d;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 700px) {
+
+    .encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .informacion {
+        flex-direction: column;
+    }
+
+    #mapa {
+        height: 500px;
+    }
+}

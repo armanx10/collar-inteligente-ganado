@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sistema inteligente para monitoreo, ubicación y control del ganado."
+    >
+
+    <title>Ganado Inteligente | Monitoreo de ganado</title>
+
+
+    <!-- CSS PRINCIPAL -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVBAR
+         ================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-contenido">
+
+
+            <a
+                href="/"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    🐄
+                </span>
+
+                <span class="logo-text">
+
+                    <strong>
+                        GANADO
+                    </strong>
+
+                    <span>
+                        INTELIGENTE
+                    </span>
+
+                </span>
+
+            </a>
+
+
+            <nav class="menu">
+
+                <a
+                    href="/"
+                    class="activo"
+                >
+                    Inicio
+                </a>
+                
+                <a href="/ganado">
+                    Ganado
+                </a>
+
+                <a href="/monitoreo">
+                    Monitoreo
+                </a>
+
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+
+                <a href="/rancho">
+                    Mi rancho
+                </a>
+
+            </nav>
+
+
+            <a
+                href="/monitoreo"
+                class="nav-boton"
+            >
+                Ver sistema
+            </a>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==================================================
+         HERO
+         ================================================== -->
+
+    <main>
+
+
+        <section class="hero">
+
+
+            <div class="hero-fondo fondo-1"></div>
+
+            <div class="hero-fondo fondo-2"></div>
+
+
+            <div class="hero-contenido">
+
+
+                <!-- COLUMNA IZQUIERDA -->
+
+                <div class="hero-texto">
+
+
+                    <div class="badge">
+
+                        <span class="badge-punto"></span>
+
+                        SISTEMA INTELIGENTE PARA GANADO
+
+                    </div>
+
+
+                    <h1>
+
+                        Monitoreo inteligente
+
+                        <span>
+                            para el ganado
+                        </span>
+
+                    </h1>
+
+
+                    <p class="hero-descripcion">
+
+                        Tecnología aplicada al campo para
+                        conocer la ubicación, el estado y las
+                        variables importantes de cada animal
+                        desde una sola plataforma.
+
+                    </p>
+
+
+                    <div class="hero-botones">
+
+
+                        <a
+                            href="/monitoreo"
+                            class="boton boton-principal"
+                        >
+
+                            Ver monitoreo
+
+                            <span>
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="#sistema"
+                            class="boton boton-secundario"
+                        >
+
+                            Conocer el proyecto
+
+                        </a>
+
+
+                    </div>
+
+
+                    <div class="hero-mini-info">
+
+
+                        <div>
+
+                            <strong>
+                                GPS
+                            </strong>
+
+                            <span>
+                                Ubicación
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                IoT
+                            </strong>
+
+                            <span>
+                                Conectividad
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                IA
+                            </strong>
+
+                            <span>
+                                Análisis
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- COLUMNA DERECHA -->
+
+                <div class="hero-visual">
+
+
+                    <div class="visual-glow"></div>
+
+
+                    <div class="monitor-card">
+
+
+                        <div class="monitor-header">
+
+
+                            <div>
+
+                                <span class="monitor-label">
+                                    COLLAR INTELIGENTE
+                                </span>
+
+                                <h3>
+                                    TORCACITA
+                                </h3>
+
+                            </div>
+
+
+                            <span class="estado-activo">
+
+                                <span></span>
+
+                                ACTIVO
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="monitor-animal">
+
+
+                            <div class="animal-icon">
+                                🐄
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    COLLAR-001
+                                </span>
+
+                                <strong>
+                                    Monitoreo en tiempo real
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="datos-grid">
+
+
+                            <div class="dato-card">
+
+                                <span>
+                                    Temperatura
+                                </span>
+
+                                <strong>
+                                    38.5°
+                                </strong>
+
+                                <small>
+                                    °C
+                                </small>
+
+                            </div>
+
+
+                            <div class="dato-card">
+
+                                <span>
+                                    Frecuencia cardíaca
+                                </span>
+
+                                <strong>
+                                    72
+                                </strong>
+
+                                <small>
+                                    BPM
+                                </small>
+
+                            </div>
+
+
+                            <div class="dato-card">
+
+                                <span>
+                                    Respiración
+                                </span>
+
+                                <strong>
+                                    24
+                                </strong>
+
+                                <small>
+                                    RPM
+                                </small>
+
+                            </div>
+
+
+                            <div class="dato-card">
+
+                                <span>
+                                    Batería
+                                </span>
+
+                                <strong>
+                                    92%
+                                </strong>
+
+                                <small>
+                                    ●
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="ubicacion-card">
+
+
+                            <div class="ubicacion-icon">
+                                📍
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Ubicación actual
+                                </span>
+
+                                <strong>
+                                    Dentro del rancho
+                                </strong>
+
+                            </div>
+
+
+                            <div class="ubicacion-check">
+                                ✓
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="floating-card card-gps">
+
+                        <span>
+                            GPS
+                        </span>
+
+                        <strong>
+                            Activo
+                        </strong>
+
+                    </div>
+
+
+                    <div class="floating-card card-alerta">
+
+                        <span>
+                            PERÍMETRO
+                        </span>
+
+                        <strong>
+                            ✓ Seguro
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="scroll-indicator">
+
+                <span>
+                    DESLIZA PARA CONOCER MÁS
+                </span>
+
+                <span class="scroll-arrow">
+                    ↓
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             CARACTERÍSTICAS
+             ================================================== -->
+
+        <section
+            class="caracteristicas"
+            id="sistema"
+        >
+
+
+            <div class="seccion-encabezado">
+
+
+                <span class="seccion-etiqueta">
+                    NUESTRO SISTEMA
+                </span>
+
+
+                <h2>
+                    Tecnología al servicio del campo
+                </h2>
+
+
+                <p>
+                    Una plataforma creada para concentrar
+                    la información generada por los collares
+                    inteligentes y convertirla en información
+                    útil para el monitoreo del ganado.
+                </p>
+
+
+            </div>
+
+
+
+            <div class="caracteristicas-grid">
+
+
+                <article class="feature-card">
+
+
+                    <div class="feature-icon">
+                        📍
+                    </div>
+
+
+                    <span class="feature-number">
+                        01
+                    </span>
+
+
+                    <h3>
+                        Ubicación GPS
+                    </h3>
+
+
+                    <p>
+                        Conoce la posición de cada animal
+                        y determina si se encuentra dentro
+                        o fuera del perímetro del rancho.
+                    </p>
+
+
+                    <a href="/monitoreo">
+                        Ver monitoreo →
+                    </a>
+
+
+                </article>
+
+
+
+                <article class="feature-card">
+
+
+                    <div class="feature-icon">
+                        ❤️
+                    </div>
+
+
+                    <span class="feature-number">
+                        02
+                    </span>
+
+
+                    <h3>
+                        Variables del ganado
+                    </h3>
+
+
+                    <p>
+                        Visualiza temperatura, frecuencia
+                        cardíaca, respiratoria y otras
+                        variables obtenidas por el collar.
+                    </p>
+
+
+                    <a href="/dashboard">
+                        Ver dashboard →
+                    </a>
+
+
+                </article>
+
+
+
+                <article class="feature-card">
+
+
+                    <div class="feature-icon">
+                        ⚠️
+                    </div>
+
+
+                    <span class="feature-number">
+                        03
+                    </span>
+
+
+                    <h3>
+                        Alertas inteligentes
+                    </h3>
+
+
+                    <p>
+                        Detecta eventos importantes y
+                        genera alertas cuando un animal
+                        sale del perímetro establecido.
+                    </p>
+
+
+                    <a href="/monitoreo">
+                        Ver alertas →
+                    </a>
+
+
+                </article>
+
+
+
+                <article class="feature-card">
+
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+
+                    <span class="feature-number">
+                        04
+                    </span>
+
+
+                    <h3>
+                        Información centralizada
+                    </h3>
+
+
+                    <p>
+                        Toda la información de los collares
+                        se almacena y consulta desde una
+                        misma plataforma.
+                    </p>
+
+
+                    <a href="/dashboard">
+                        Explorar sistema →
+                    </a>
+
+
+                </article>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             TECNOLOGÍA
+             ================================================== -->
+
+        <section class="tecnologia">
+
+
+            <div class="tecnologia-contenido">
+
+
+                <div>
+
+                    <span class="seccion-etiqueta">
+                        TECNOLOGÍA
+                    </span>
+
+
+                    <h2>
+                        Conectamos el campo
+                        con los datos.
+                    </h2>
+
+
+                    <p>
+                        El sistema integra sensores,
+                        procesamiento, comunicación inalámbrica,
+                        almacenamiento y una plataforma web
+                        para centralizar la información del ganado.
+                    </p>
+
+
+                    <a
+                        href="/dashboard"
+                        class="texto-boton"
+                    >
+                        Explorar plataforma →
+                    </a>
+
+                </div>
+
+
+
+                <div class="tecnologia-pila">
+
+
+                    <div class="tech-item">
+
+                        <strong>
+                            ESP32
+                        </strong>
+
+                        <span>
+                            Controlador
+                        </span>
+
+                    </div>
+
+
+                    <div class="tech-line"></div>
+
+
+                    <div class="tech-item">
+
+                        <strong>
+                            SENSORES
+                        </strong>
+
+                        <span>
+                            Datos
+                        </span>
+
+                    </div>
+
+
+                    <div class="tech-line"></div>
+
+
+                    <div class="tech-item">
+
+                        <strong>
+                            LoRa / GPS
+                        </strong>
+
+                        <span>
+                            Comunicación
+                        </span>
+
+                    </div>
+
+
+                    <div class="tech-line"></div>
+
+
+                    <div class="tech-item">
+
+                        <strong>
+                            MONGODB
+                        </strong>
+
+                        <span>
+                            Información
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             CTA
+             ================================================== -->
+
+        <section class="cta">
+
+
+            <div>
+
+                <span>
+                    ¿LISTO PARA MONITOREAR EL GANADO?
+                </span>
+
+                <h2>
+                    Todo el rancho,
+                    en un solo lugar.
+                </h2>
+
+            </div>
+
+
+            <a
+                href="/monitoreo"
+                class="boton boton-cta"
+            >
+
+                Abrir monitoreo
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==================================================
+         FOOTER
+         ================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-contenido">
+
+
+            <div class="footer-logo">
+
+                <span>
+                    🐄
+                </span>
+
+                <strong>
+                    GANADO INTELIGENTE
+                </strong>
+
+            </div>
+
+
+            <p>
+                Tecnología · Ganadería · IoT
+            </p>
+
+
+            <div class="footer-links">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <a href="/monitoreo">
+                    Monitoreo
+                </a>
+
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+
+                <a href="/rancho">
+                    Mi rancho
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Sistema de monitoreo inteligente para ganado
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trazar Rancho</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/rancho.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <header class="encabezado">
+            <div>
+                <h1>🌱 Trazar mi rancho</h1>
+                <p>
+                    Marca los puntos del perímetro de tu rancho sobre el mapa.
+                </p>
+            </div>
+
+            <a href="/dashboard" class="boton-regresar">
+                ← Regresar al dashboard
+            </a>
+        </header>
+
+
+        <section class="panel-controles">
+
+            <button id="btnDibujar" class="boton boton-principal">
+                ✏️ Dibujar rancho
+            </button>
+
+            <button id="btnCerrar" class="boton boton-guardar">
+                ✓ Cerrar y guardar
+            </button>
+
+            <button id="btnLimpiar" class="boton boton-limpiar">
+                🗑 Limpiar
+            </button>
+
+        </section>
+
+
+        <section class="informacion">
+
+            <div class="estado">
+                <strong>Estado:</strong>
+
+                <span id="estado">
+                    Presiona "Dibujar rancho" para comenzar.
+                </span>
+            </div>
+
+            <div class="contador">
+                Puntos marcados:
+                <strong id="contadorPuntos">0</strong>
+            </div>
+
+        </section>
+
+
+        <section class="nombre-rancho">
+
+            <label for="nombreRancho">
+                Nombre del rancho:
+            </label>
+
+            <input
+                type="text"
+                id="nombreRancho"
+                value="Rancho principal"
+                placeholder="Ej. Rancho principal"
+            >
+
+        </section>
+
+
+        <div id="mensaje" class="mensaje"></div>
+
+
+        <div id="mapa"></div>
+
+    </div>
+
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin=""
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/rancho.js') }}"
+    ></script>
+
+</body>
+</html>
